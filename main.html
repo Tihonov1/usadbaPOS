@@ -48,21 +48,31 @@
                     </svg>
                 </div>
 
-                <div class="filter-controls">
-                    <div class="sort-buttons">
-                        <span class="filter-label">Сортировка:</span>
-                        <button class="sort-btn active" data-sort="default">По умолчанию</button>
-                        <button class="sort-btn" data-sort="price-asc">Дешевле</button>
-                        <button class="sort-btn" data-sort="price-desc">Дороже</button>
-                        <button class="sort-btn" data-sort="name">По названию</button>
+                <div class="filter-container">
+                    <div class="filter-header">
+                        <h3 class="filter-title">Фильтры и сортировка</h3>
+                        <button class="toggle-filter-btn" id="toggleFilters">
+                            <svg class="filter-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="price-filter">
-                        <span class="filter-label">Цена:</span>
-                        <input type="number" class="price-input" id="minPrice" placeholder="От" min="0">
-                        <span>-</span>
-                        <input type="number" class="price-input" id="maxPrice" placeholder="До" min="0">
-                        <button class="button-small" id="applyPriceFilter">Применить</button>
-                        <button class="button-small secondary" id="resetPriceFilter">Сбросить</button>
+                    <div class="filter-controls" id="filterControls">
+                        <div class="sort-buttons">
+                            <span class="filter-label">Сортировка:</span>
+                            <button class="sort-btn active" data-sort="default">По умолчанию</button>
+                            <button class="sort-btn" data-sort="price-asc">Дешевле</button>
+                            <button class="sort-btn" data-sort="price-desc">Дороже</button>
+                            <button class="sort-btn" data-sort="name">По названию</button>
+                        </div>
+                        <div class="price-filter">
+                            <span class="filter-label">Цена:</span>
+                            <input type="number" class="price-input" id="minPrice" placeholder="От" min="0">
+                            <span>-</span>
+                            <input type="number" class="price-input" id="maxPrice" placeholder="До" min="0">
+                            <button class="button-small" id="applyPriceFilter">Применить</button>
+                            <button class="button-small secondary" id="resetPriceFilter">Сбросить</button>
+                        </div>
                     </div>
                 </div>
     

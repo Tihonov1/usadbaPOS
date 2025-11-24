@@ -523,6 +523,27 @@ document.addEventListener('DOMContentLoaded', async function() {
             loadMenu();
         });
     }
+    const toggleFiltersBtn = document.getElementById('toggleFilters');
+    const filterControls = document.getElementById('filterControls');
+    const filterIcon = document.querySelector('.filter-icon');
+    const filterHeader = document.querySelector('.filter-header');
+    if (toggleFiltersBtn && filterControls) {
+        const toggleFilters = function() {
+            filterControls.classList.toggle('collapsed');
+            if (filterIcon) {
+                filterIcon.classList.toggle('rotated');
+            }
+        };
+        toggleFiltersBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleFilters();
+        });
+        if (filterHeader) {
+            filterHeader.addEventListener('click', function() {
+                toggleFilters();
+            });
+        }
+    }
     if (document.querySelector('.menu-grid')) {
         loadCategories(); 
         loadMenu(); 
