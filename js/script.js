@@ -101,6 +101,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
         return;
     }
+    if (role === 'chef' && currentPage === 'main.html') {
+        const q = buildQuery({ name, email, role, userId });
+        window.location.href = 'kitchen.html' + q;
+        return;
+    }
     if (userId && (!name || !email || !role)) {
         const user = db.findById('users', parseInt(userId));
         if (user) {
@@ -229,6 +234,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     const goKitchenBtn = document.getElementById('goKitchen');
     if (goKitchenBtn) {
+        if (role !== 'chef' && role !== 'admin') {
+            goKitchenBtn.style.display = 'none';
+        }
         goKitchenBtn.addEventListener('click', function() {
             const q = buildQuery({ name, email, role, userId });
             window.location.href = 'kitchen.html' + q;
