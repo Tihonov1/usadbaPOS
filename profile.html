@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - Ресторан Усадьба</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <button class="back-button" onclick="goBack()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Назад
+        </button>
+        <div class="header-left" style="gap: 12px;">
+            <div class="logo">
+                <img src="./icons/logo.png" alt="Logo" width="20" height="20">
+            </div>
+            <div class="header-title">
+                <h1>Ресторан Усадьба</h1>
+                <p>POS-система</p>
+            </div>
+        </div>
+        <div style="width: 80px;"></div>
+    </header>
+
+    
+    <div class="container">
+        
+        <div class="card profile-card">
+            <div class="profile-row">
+                <div class="profile-left">
+                    <div class="avatar-wrapper">
+                        <div class="avatar" id="avatarInitials">ИИ</div>
+                        <button class="avatar-upload-btn" onclick="document.getElementById('avatarInput').click()" title="Изменить фото">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                        </button>
+                        <input type="file" id="avatarInput" accept="image/*" style="display: none;" onchange="uploadAvatar(this)">
+                    </div>
+                    <div>
+                        <div class="profile-name-row">
+                            <h2 id="userName">Иван Иванов</h2>
+                            <span class="badge" id="userRoleBadge">Официант</span>
+                        </div>
+                        <div class="profile-meta-row">
+                            <div class="meta-item">
+                                <span class="dot"></span>
+                                <span id="userEmail">ivan.ivanov@usadba.ru</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <svg class="stat-icon" style="stroke: #ea580c;" viewBox="0 0 24 24">
+                        <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    <span class="stat-change">+12%</span>
+                </div>
+                <p class="stat-label">Обработано заказов</p>
+                <p class="stat-value">248</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <svg class="stat-icon" style="stroke: #f43f5e;" viewBox="0 0 24 24">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                    <span class="stat-change">+8%</span>
+                </div>
+                <p class="stat-label">Общая сумма</p>
+                <p class="stat-value">₽ 458,320</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <svg class="stat-icon" style="stroke: #f59e0b;" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span class="stat-change">+5%</span>
+                </div>
+                <p class="stat-label">Рабочих часов</p>
+                <p class="stat-value">156</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <svg class="stat-icon" style="stroke: #f97316;" viewBox="0 0 24 24">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    <span class="stat-change">+3%</span>
+                </div>
+                <p class="stat-label">Средний чек</p>
+                <p class="stat-value">₽ 1,847</p>
+            </div>
+        </div>
+
+        
+        <div class="orders-section" style="margin-top: 32px;">
+            <h2 class="section-title">Мои заказы</h2>
+            
+            
+            <div class="orders-tabs">
+                <button class="orders-tab active" data-tab="pending" onclick="switchOrdersTab('pending')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Ожидают оплаты
+                    <span class="tab-badge" id="pendingOrdersCount">0</span>
+                </button>
+                <button class="orders-tab" data-tab="paid" onclick="switchOrdersTab('paid')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Оплачено
+                    <span class="tab-badge" id="paidOrdersCount">0</span>
+                </button>
+            </div>
+
+            
+            <div class="orders-tab-content active" id="pendingOrdersContent">
+                <div class="active-orders-grid" id="activeOrdersGrid">
+                    
+                </div>
+            </div>
+
+            
+            <div class="orders-tab-content" id="paidOrdersContent">
+                <div class="active-orders-grid" id="paidOrdersGrid">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/validation.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        let currentUserId = null;
+
+        // Функция для загрузки аватара
+        async function uploadAvatar(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            // Проверка размера файла (макс 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Файл слишком большой! Максимальный размер: 5MB');
+                return;
+            }
+
+            // Проверка типа файла
+            if (!file.type.startsWith('image/')) {
+                alert('Пожалуйста, выберите изображение');
+                return;
+            }
+
+            try {
+                // Читаем файл как base64
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const base64Image = e.target.result;
+                    
+                    // Сохраняем в БД
+                    if (!window.db || !window.db.db) {
+                        alert('База данных не инициализирована');
+                        return;
+                    }
+
+                    if (!currentUserId) {
+                        alert('Ошибка: ID пользователя не определён');
+                        return;
+                    }
+
+                    const user = window.db.findById('users', currentUserId);
+                    if (!user) {
+                        alert('Пользователь не найден');
+                        return;
+                    }
+
+                    // Обновляем пользователя
+                    user.avatar = base64Image;
+                    const updated = window.db.update('users', currentUserId, user);
+                    
+                    if (updated) {
+                        console.log('✅ Аватар успешно обновлён');
+                        // Обновляем отображение
+                        updateAvatarDisplay(base64Image);
+                    } else {
+                        alert('Не удалось сохранить аватар');
+                    }
+                };
+                reader.readAsDataURL(file);
+            } catch (error) {
+                console.error('Ошибка при загрузке аватара:', error);
+                alert('Ошибка при загрузке файла');
+            }
+        }
+
+        // Функция для обновления отображения аватара
+        function updateAvatarDisplay(avatarUrl) {
+            const avatarElement = document.getElementById('avatarInitials');
+            if (avatarElement && avatarUrl) {
+                avatarElement.style.backgroundImage = `url(${avatarUrl})`;
+                avatarElement.style.backgroundSize = 'cover';
+                avatarElement.textContent = ''; // Убираем инициалы/иконки
+            }
+        }
+
+        // Функция для получения инициалов
+        function getInitials(name) {
+            if (!name) return '??';
+            const parts = name.trim().split(' ');
+            if (parts.length >= 2) {
+                return (parts[0][0] + parts[1][0]).toUpperCase();
+            }
+            return name.substring(0, 2).toUpperCase();
+        }
+
+        // Инициализация профиля
+        async function initProfile() {
+            // Ждем инициализации БД
+            if (!window.dbInitialized) {
+                await window.initializeDatabase();
+            }
+
+            // Получаем userId из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            currentUserId = parseInt(urlParams.get('userId'));
+
+            if (!currentUserId) {
+                alert('Ошибка: не указан пользователь');
+                return;
+            }
+
+            const user = window.db.findById('users', currentUserId);
+            if (!user) {
+                alert('Пользователь не найден');
+                return;
+            }
+
+            // Загружаем роль
+            const role = window.db.findById('roles', user.role_id);
+
+            // Обновляем UI
+            document.getElementById('userName').textContent = user.name || 'Пользователь';
+            document.getElementById('userEmail').textContent = user.email || 'Не указан';
+            document.getElementById('userRoleBadge').textContent = role ? role.name : 'Роль не определена';
+
+            // Обновляем аватар
+            const avatarElement = document.getElementById('avatarInitials');
+            if (user.avatar) {
+                // Показываем загруженное фото
+                avatarElement.style.backgroundImage = `url(${user.avatar})`;
+                avatarElement.textContent = '';
+            } else if (user.role_id === 2) {
+                // Администратор - показываем иконку admin
+                avatarElement.style.backgroundImage = `url('./icons/admin.png')`;
+                avatarElement.style.backgroundSize = 'cover';
+                avatarElement.textContent = '';
+            } else if (user.role_id === 3) {
+                // Повар - показываем иконку chef
+                avatarElement.style.backgroundImage = `url('./icons/chef.png')`;
+                avatarElement.style.backgroundSize = 'cover';
+                avatarElement.textContent = '';
+            } else {
+                // Остальные роли - показываем logo
+                avatarElement.style.backgroundImage = `url('./icons/logo.png')`;
+                avatarElement.style.backgroundSize = 'cover';
+                avatarElement.textContent = '';
+            }
+
+            console.log('✅ Профиль загружен:', user);
+        }
+
+        // Функция для возврата назад
+        function goBack() {
+            if (!currentUserId) {
+                window.location.href = 'main.html';
+                return;
+            }
+
+            // Получаем данные пользователя из БД
+            const user = window.db.findById('users', currentUserId);
+            if (user) {
+                const userRole = window.db.findById('roles', user.role_id);
+                const roleCode = userRole ? userRole.code : 'waiter';
+                
+                // Формируем URL с полными данными
+                const params = new URLSearchParams({
+                    userId: user.id,
+                    name: user.name,
+                    email: user.email,
+                    role: roleCode
+                });
+                window.location.href = `main.html?${params.toString()}`;
+            } else {
+                window.location.href = 'main.html';
+            }
+        }
+
+        // Функция переключения вкладок
+        window.switchOrdersTab = function(tab) {
+            // Переключаем активную вкладку
+            document.querySelectorAll('.orders-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.orders-tab[data-tab="${tab}"]`).classList.add('active');
+
+            // Переключаем контент
+            document.querySelectorAll('.orders-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tab}OrdersContent`).classList.add('active');
+        };
+
+        // Функция для загрузки активных заказов
+        function loadActiveOrders() {
+            if (!currentUserId || !window.db || !window.db.db) {
+                return;
+            }
+
+            const activeOrdersGrid = document.getElementById('activeOrdersGrid');
+            const pendingCountBadge = document.getElementById('pendingOrdersCount');
+            
+            if (!activeOrdersGrid) return;
+
+            // Получаем все заказы текущего пользователя с неоплаченными счетами
+            const allOrders = window.db.getAll('orders');
+            const allBills = window.db.getAll('bills');
+            
+            // Находим заказы, которые еще не оплачены
+            const activeOrders = allOrders.filter(order => {
+                // Проверяем, что заказ создан текущим пользователем
+                if (order.user_id !== currentUserId) return false;
+                
+                // Проверяем, что у заказа есть счет и он не оплачен
+                const orderBill = allBills.find(bill => bill.order_id === order.id);
+                return !orderBill || orderBill.status_id === 1; // 1 = НЕ_ОПЛАЧЕН
+            });
+
+            // Обновляем счетчик
+            if (pendingCountBadge) {
+                pendingCountBadge.textContent = activeOrders.length;
+            }
+
+            // Показываем/скрываем секцию
+            if (activeOrders.length === 0) {
+                activeOrdersGrid.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #6b7280;">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 16px; opacity: 0.3;">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <p>У вас нет активных заказов</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Рендерим заказы
+            activeOrdersGrid.innerHTML = activeOrders.map(order => {
+                const table = window.db.findById('tables', order.table_id);
+                const status = window.db.findById('order_status', order.status_id);
+                const items = window.db.getOrderItems(order.id);
+                const total = window.db.calculateOrderTotal(order.id);
+
+                return `
+                    <div class="active-order-card">
+                        <div class="active-order-header">
+                            <div class="active-order-info">
+                                <div class="active-order-number">Заказ #${order.id}</div>
+                                <div class="active-order-table">Стол ${table ? table.number : '?'}</div>
+                            </div>
+                            <span class="active-order-status">${status ? status.name : 'Неизвестно'}</span>
+                        </div>
+                        <div class="active-order-items">
+                            ${items.map(item => {
+                                const dish = window.db.findById('dishes', item.dish_id);
+                                return `
+                                    <div class="active-order-item">
+                                        <span class="active-order-item-name">${dish ? dish.name : 'Блюдо'}</span>
+                                        <span class="active-order-item-qty">x${item.count}</span>
+                                        <span class="active-order-item-price">${window.formatMoney(item.price * item.count)}</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        <div class="active-order-footer">
+                            <div class="active-order-total">${window.formatMoney(total)}</div>
+                            <button class="active-order-pay-btn" onclick="payActiveOrder(${order.id}, ${total})">Оплатить</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            console.log(`✅ Загружено ${activeOrders.length} активных заказов`);
+        }
+
+        // Функция для загрузки оплаченных заказов
+        function loadPaidOrders() {
+            if (!currentUserId || !window.db || !window.db.db) {
+                return;
+            }
+
+            const paidOrdersGrid = document.getElementById('paidOrdersGrid');
+            const paidCountBadge = document.getElementById('paidOrdersCount');
+            
+            if (!paidOrdersGrid) return;
+
+            // Получаем все заказы текущего пользователя с оплаченными счетами
+            const allOrders = window.db.getAll('orders');
+            const allBills = window.db.getAll('bills');
+            
+            // Находим заказы, которые оплачены
+            const paidOrders = allOrders.filter(order => {
+                // Проверяем, что заказ создан текущим пользователем
+                if (order.user_id !== currentUserId) return false;
+                
+                // Проверяем, что у заказа есть счет и он оплачен
+                const orderBill = allBills.find(bill => bill.order_id === order.id);
+                return orderBill && orderBill.status_id === 2; // 2 = ОПЛАЧЕН
+            }).sort((a, b) => b.id - a.id); // Сортируем по убыванию ID (новые сначала)
+
+            // Обновляем счетчик
+            if (paidCountBadge) {
+                paidCountBadge.textContent = paidOrders.length;
+            }
+
+            // Показываем/скрываем секцию
+            if (paidOrders.length === 0) {
+                paidOrdersGrid.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #6b7280;">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 16px; opacity: 0.3;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <p>У вас пока нет оплаченных заказов</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Рендерим заказы
+            paidOrdersGrid.innerHTML = paidOrders.map(order => {
+                const table = window.db.findById('tables', order.table_id);
+                const status = window.db.findById('order_status', order.status_id);
+                const items = window.db.getOrderItems(order.id);
+                const total = window.db.calculateOrderTotal(order.id);
+                const bill = allBills.find(b => b.order_id === order.id);
+                
+                // Форматируем дату
+                const orderDate = order.created_at ? new Date(order.created_at).toLocaleString('ru-RU', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }) : 'Дата неизвестна';
+
+                return `
+                    <div class="active-order-card paid-order-card">
+                        <div class="active-order-header">
+                            <div class="active-order-info">
+                                <div class="active-order-number">Заказ #${order.id}</div>
+                                <div class="active-order-table">Стол ${table ? table.number : '?'} • ${orderDate}</div>
+                            </div>
+                            <span class="active-order-status paid-status">✓ Оплачено</span>
+                        </div>
+                        <div class="active-order-items">
+                            ${items.map(item => {
+                                const dish = window.db.findById('dishes', item.dish_id);
+                                return `
+                                    <div class="active-order-item">
+                                        <span class="active-order-item-name">${dish ? dish.name : 'Блюдо'}</span>
+                                        <span class="active-order-item-qty">x${item.count}</span>
+                                        <span class="active-order-item-price">${window.formatMoney(item.price * item.count)}</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        <div class="active-order-footer">
+                            <div class="active-order-total">${window.formatMoney(total)}</div>
+                            <div class="paid-order-method">
+                                ${bill && bill.payment_method ? getPaymentMethodIcon(bill.payment_method) : '💳'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            console.log(`✅ Загружено ${paidOrders.length} оплаченных заказов`);
+        }
+
+        // Функция для получения иконки способа оплаты
+        function getPaymentMethodIcon(method) {
+            const icons = {
+                'cash': '💵 Наличные',
+                'card': '💳 Карта',
+                'online': '🌐 Онлайн'
+            };
+            return icons[method] || '💳 Карта';
+        }
+
+        // Функция оплаты активного заказа
+        window.payActiveOrder = function(orderId, total) {
+            // Сохраняем данные и переходим на главную страницу для оплаты
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = urlParams.get('userId');
+            
+            if (!userId) {
+                showAlert('Ошибка: не указан пользователь');
+                return;
+            }
+
+            // Переходим на главную страницу с параметром для оплаты заказа
+            const user = window.db.findById('users', currentUserId);
+            if (user) {
+                const userRole = window.db.findById('roles', user.role_id);
+                const roleCode = userRole ? userRole.code : 'waiter';
+                
+                const params = new URLSearchParams({
+                    userId: user.id,
+                    name: user.name,
+                    email: user.email,
+                    role: roleCode,
+                    payOrderId: orderId
+                });
+                window.location.href = `main.html?${params.toString()}`;
+            }
+        };
+
+        // Загружаем профиль и заказы при загрузке страницы
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initProfile();
+            loadActiveOrders();
+            loadPaidOrders();
+            
+            // Обновляем при изменении БД
+            window.addEventListener('databaseUpdated', () => {
+                loadActiveOrders();
+                loadPaidOrders();
+            });
+        });
+    </script>
+</body>
+</html>

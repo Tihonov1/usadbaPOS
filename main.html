@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - Ресторан Усадьба</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <img src="./icons/logo.png" alt="Logo" width="20" height="20">
+                </div>
+                <div class="header-title">
+                    <h1>Ресторан Усадьба</h1>
+                    <p>POS система</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="button" id="goKitchen">
+                    <img src="./icons/chef.png" alt="Kitchen" width="16" height="16">
+                    Кухня
+                </button>
+                <button class="button" id="logoutBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8z"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    Выход из системы
+                </button>
+                <button class="button user-button" id="goProfile">
+                    <img src="./icons/logo.png" alt="Profile" width="16" height="16">
+                    Иван Иванов
+                </button>
+            </div>
+        </header>
+    
+        
+        <div class="main-container">
+            
+            <main class="content">
+                
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" placeholder="Поиск блюд...">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+    
+                
+                <div class="categories">
+                    
+                </div>
+    
+                
+                <div class="menu-grid">
+                    
+                </div>
+            </main>
+    
+            
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-title">
+                        <h2>Текущий заказ</h2>
+                        <div class="badge" id="ordersCountBadge">0 позиций</div>
+                    </div>
+                    <input type="text" class="table-input" placeholder="Номер стола...">
+                    <div id="tableOrderInfo" class="table-order-info" style="display: none;"></div>
+                </div>
+    
+                <div class="sidebar-content" id="ordersList"></div>
+    
+                <div class="sidebar-footer">
+                    <div class="total-row">
+                        <span>Промежуточный итог:</span>
+                        <span id="subtotalValue">0 ₽</span>
+                    </div>
+                    <div class="total-row">
+                        <span>НДС 20%:</span>
+                        <span id="vatValue">0 ₽</span>
+                    </div>
+                    <div class="total-row final">
+                        <span>Итого к оплате:</span>
+                        <span id="totalValue">0 ₽</span>
+                    </div>
+    
+                    <div class="action-buttons">
+                        <button class="button primary" id="sendToKitchenBtn">Отправить на кухню</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+    
+    <div id="alertModal" class="modal alert-modal">
+        <div class="modal-content alert-modal-content">
+            <div class="modal-header">
+                <div class="alert-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <button class="modal-close" onclick="closeAlertModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="alertModalMessage" class="alert-message">Сообщение</p>
+            </div>
+            <div class="modal-footer">
+                <button class="button primary" onclick="closeAlertModal()">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="confirmModal" class="modal confirm-modal">
+        <div class="modal-content confirm-modal-content">
+            <div class="modal-header">
+                <div class="confirm-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9 12l2 2 4-4"></path>
+                    </svg>
+                </div>
+                <button class="modal-close" onclick="closeConfirmModal(false)">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmModalMessage" class="confirm-message">Вы уверены?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="button secondary" onclick="closeConfirmModal(false)">Отмена</button>
+                <button class="button primary" id="confirmModalBtn" onclick="closeConfirmModal(true)">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Выберите способ оплаты</h2>
+                <button class="modal-close" onclick="closePaymentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-methods">
+                    <button class="payment-method-btn" data-method="cash" onclick="selectPaymentMethod('cash')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                        <span>Наличные</span>
+                    </button>
+                    <button class="payment-method-btn" data-method="card" onclick="selectPaymentMethod('card')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                        <span>Банковская карта</span>
+                    </button>
+                    <button class="payment-method-btn" data-method="online" onclick="selectPaymentMethod('online')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>Онлайн оплата</span>
+                    </button>
+                </div>
+                <div class="payment-summary">
+                    <div class="payment-total">
+                        <span>К оплате:</span>
+                        <span id="paymentTotalAmount" class="payment-amount">0 ₽</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button secondary" onclick="closePaymentModal()">Отмена</button>
+                <button class="button green" id="confirmPaymentBtn" onclick="confirmPayment()" disabled>Подтвердить оплату</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/validation.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

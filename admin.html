@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Администрирование - Ресторан Усадьба</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <button class="back-button" onclick="goBack()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Назад
+        </button>
+        <div class="header-left">
+            <div class="logo">
+                <img src="./icons/admin.png" alt="Admin" width="20" height="20">
+            </div>
+            <div class="header-title">
+                <h1>Администрирование</h1>
+                <p>Управление меню и отчеты</p>
+            </div>
+        </div>
+    </header>
+
+    
+    <div class="container">
+        
+        <div class="tabs" id="adminTabs">
+            <button class="tab-btn active" data-tab="dishes">Управление блюдами</button>
+            <button class="tab-btn" data-tab="staff">Управление сотрудниками</button>
+            <button class="tab-btn" data-tab="reports">Отчеты</button>
+        </div>
+
+        
+        <div id="dishesTab" class="tab-content active">
+            <div class="admin-header">
+                <h2>Управление блюдами</h2>
+                <button class="button primary" id="addDishBtn">+ Добавить блюдо</button>
+            </div>
+
+            
+            <div class="dishes-list" id="dishesList">
+                
+            </div>
+        </div>
+
+        
+        <div id="staffTab" class="tab-content">
+            <div class="admin-header">
+                <h2>Управление сотрудниками</h2>
+                <button class="button primary" id="addStaffBtn">+ Добавить сотрудника</button>
+            </div>
+
+            
+            <div class="staff-list" id="staffList">
+                
+            </div>
+        </div>
+
+        
+        <div id="reportsTab" class="tab-content">
+            <div class="admin-header">
+                <h2>Отчеты по выручке</h2>
+                <div class="report-controls">
+                    <input type="date" id="reportDateFrom" class="input">
+                    <span>—</span>
+                    <input type="date" id="reportDateTo" class="input">
+                    <button class="button primary" id="generateReportBtn">Сформировать отчет</button>
+                </div>
+            </div>
+
+            
+            <div class="report-results" id="reportResults">
+                <div class="empty-state">
+                    <p>Выберите период и нажмите "Сформировать отчет"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="dishModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Добавить блюдо</h3>
+                <button class="modal-close" onclick="closeDishModal()">&times;</button>
+            </div>
+            <form id="dishForm" class="modal-body">
+                <input type="hidden" id="dishId">
+                <div class="form-group">
+                    <label class="label" for="dishName">Название блюда</label>
+                    <input class="input" type="text" id="dishName" required>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="dishPrice">Цена (₽)</label>
+                    <input class="input" type="number" id="dishPrice" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="dishCategory">Категория</label>
+                    <select class="select" id="dishCategory" required>
+                        <option value="">Выберите категорию</option>
+                        <option value="1">Холодные закуски</option>
+                        <option value="2">Горячие закуски</option>
+                        <option value="3">Основные блюда</option>
+                        <option value="4">Десерты</option>
+                        <option value="5">Напитки</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="dishImage">Изображение блюда</label>
+                    <input class="input" type="file" id="dishImage" accept="image/*">
+                    <div id="dishImagePreview" style="margin-top: 12px; display: none;">
+                        <img id="dishImagePreviewImg" src="" alt="Превью" style="max-width: 200px; max-height: 200px; border-radius: 8px; border: 1px solid #fed7aa;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label">
+                        <input type="checkbox" id="dishAvailable" checked>
+                        Доступно для заказа
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button" onclick="closeDishModal()">Отмена</button>
+                    <button type="submit" class="button primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="staffModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="staffModalTitle">Добавить сотрудника</h3>
+                <button class="modal-close" onclick="closeStaffModal()">&times;</button>
+            </div>
+            <form id="staffForm" class="modal-body">
+                <input type="hidden" id="staffId">
+                <div class="form-group">
+                    <label class="label" for="staffName">ФИО</label>
+                    <input class="input" type="text" id="staffName" placeholder="Иванов Иван Иванович" required>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="staffEmail">Email</label>
+                    <input class="input" type="email" id="staffEmail" placeholder="user@usadba.local" required>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="staffLogin">Логин</label>
+                    <input class="input" type="text" id="staffLogin" placeholder="ivanov" required>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="staffPassword">Пароль</label>
+                    <input class="input" type="password" id="staffPassword" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="staffRole">Должность</label>
+                    <select class="select" id="staffRole" required>
+                        <option value="">Выберите должность</option>
+                        <option value="1">Официант</option>
+                        <option value="3">Повар</option>
+                        <option value="4">Менеджер</option>
+                        <option value="2">Администратор</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button" onclick="closeStaffModal()">Отмена</button>
+                    <button type="submit" class="button primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="alertModal" class="modal alert-modal">
+        <div class="modal-content alert-modal-content">
+            <div class="modal-header">
+                <div class="alert-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <button class="modal-close" onclick="closeAlertModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="alertModalMessage" class="alert-message">Сообщение</p>
+            </div>
+            <div class="modal-footer">
+                <button class="button primary" onclick="closeAlertModal()">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="confirmModal" class="modal confirm-modal">
+        <div class="modal-content confirm-modal-content">
+            <div class="modal-header">
+                <div class="confirm-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9 12l2 2 4-4"></path>
+                    </svg>
+                </div>
+                <button class="modal-close" onclick="closeConfirmModal(false)">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmModalMessage" class="confirm-message">Вы уверены?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="button secondary" onclick="closeConfirmModal(false)">Отмена</button>
+                <button class="button primary" id="confirmModalBtn" onclick="closeConfirmModal(true)">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/validation.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

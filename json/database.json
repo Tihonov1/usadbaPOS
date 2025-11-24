@@ -1,0 +1,124 @@
+{
+  "roles": [
+    { "id": 1, "code": "waiter", "name": "Официант" },
+    { "id": 2, "code": "admin", "name": "Администратор" },
+    { "id": 3, "code": "chef", "name": "Повар" },
+    { "id": 4, "code": "manager", "name": "Менеджер" }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "login": "admin",
+      "email": "admin@usadba.local",
+      "password": "admin123",
+      "name": "Тихонов Илья Денисович",
+      "role_id": 2,
+      "avatar": null,
+      "created_at": "2024-01-10T09:00:00Z"
+    },
+    {
+      "id": 2,
+      "login": "waiter",
+      "email": "waiter@usadba.local",
+      "password": "waiter123",
+      "name": "Иванов Иван Иванович",
+      "role_id": 1,
+      "avatar": null,
+      "created_at": "2024-01-11T09:00:00Z"
+    },
+    {
+      "id": 3,
+      "login": "chef",
+      "email": "chef@usadba.local",
+      "password": "chef123",
+      "name": "Сидоров Петр Васильевич",
+      "role_id": 3,
+      "avatar": null,
+      "created_at": "2024-01-12T09:00:00Z"
+    }
+  ],
+  "table_status": [
+    { "id": 1, "name": "СВОБОДЕН" },
+    { "id": 2, "name": "ЗАНЯТ" },
+    { "id": 3, "name": "ЗАБРОНИРОВАН" }
+  ],
+  "tables": [
+    { "id": 1, "number": 1, "capacity": 4, "status_id": 1, "created_at": "2024-01-01T00:00:00Z" },
+    { "id": 2, "number": 2, "capacity": 2, "status_id": 1, "created_at": "2024-01-01T00:00:00Z" },
+    { "id": 3, "number": 3, "capacity": 6, "status_id": 1, "created_at": "2024-01-01T00:00:00Z" },
+    { "id": 4, "number": 4, "capacity": 4, "status_id": 3, "created_at": "2024-01-01T00:00:00Z" },
+    { "id": 5, "number": 5, "capacity": 2, "status_id": 2, "created_at": "2024-01-01T00:00:00Z" }
+  ],
+  "order_status": [
+    { "id": 1, "name": "НОВЫЙ" },
+    { "id": 2, "name": "НА_КУХНЕ" },
+    { "id": 3, "name": "ГОТОВ" },
+    { "id": 4, "name": "ОПЛАЧЕН" }
+  ],
+  "orders": [],
+  "order_items": [],
+  "dish_categories": [
+    { "id": 1, "name": "Холодные закуски", "description": "Салаты и холодные закуски" },
+    { "id": 2, "name": "Горячие закуски", "description": "Горячие закуски и аппетайзеры" },
+    { "id": 3, "name": "Основные блюда", "description": "Главные блюда" },
+    { "id": 4, "name": "Десерты", "description": "Сладости и десерты" },
+    { "id": 5, "name": "Напитки", "description": "Безалкогольные и алкогольные напитки" }
+  ],
+  "dishes": [
+    {
+      "id": 1,
+      "name": "Цезарь с курицей",
+      "category_id": 1,
+      "price": 550,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800"
+    },
+    {
+      "id": 2,
+      "name": "Греческий салат",
+      "category_id": 1,
+      "price": 450,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=800"
+    },
+    {
+      "id": 3,
+      "name": "Стейк рибай",
+      "category_id": 3,
+      "price": 1200,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800"
+    },
+    {
+      "id": 4,
+      "name": "Паста Карбонара",
+      "category_id": 3,
+      "price": 650,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=800"
+    },
+    {
+      "id": 5,
+      "name": "Тирамису",
+      "category_id": 4,
+      "price": 320,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?auto=format&fit=crop&w=800"
+    },
+    {
+      "id": 6,
+      "name": "Кола 0.5",
+      "category_id": 5,
+      "price": 180,
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1459257868276-5e65389e2722?auto=format&fit=crop&w=800"
+    }
+  ],
+  "bill_status": [
+    { "id": 1, "name": "НЕ_ОПЛАЧЕН" },
+    { "id": 2, "name": "ОПЛАЧЕН" }
+  ],
+  "bills": [],
+  "reports": []
+}
+

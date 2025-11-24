@@ -1,0 +1,30 @@
+# Зависимости
+node_modules/
+package-lock.json
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Временные файлы
+*.log
+*.tmp
+*.temp
+~*
+
+# Python
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Локальные настройки
+.env
+.env.local
+

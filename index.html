@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Вход - Ресторан Усадьба</title>
+</head>
+<body>
+    <div class="auth-container">
+    <div class="card auth-card">
+        <div class="card-header">
+            <div class="icon-wrapper">
+                <img src="./icons/logo.png" alt="Logo" class="icon">
+            </div>
+            <h1 class="card-title">Добро пожаловать в Усадьбу</h1>
+            <p class="card-description">Войдите в систему для работы с POS-терминалом</p>
+        </div>
+
+        <form id="loginForm" class="card-content">
+            <div class="form-group">
+                <label class="label" for="email">Email</label>
+                <input 
+                    class="input" 
+                    type="email" 
+                    id="email" 
+                    placeholder="name@example.com" 
+                    required
+                />
+            </div>
+
+            <div class="form-group">
+                <label class="label" for="password">Пароль</label>
+                <input 
+                    class="input" 
+                    type="password" 
+                    id="password" 
+                    placeholder="••••••••" 
+                    required
+                />
+            </div>
+        </form>
+
+        <div class="card-footer">
+            <button type="submit" form="loginForm" class="button">Войти</button>
+        </div>
+    </div>
+    </div>
+    <script src="js/validation.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
+

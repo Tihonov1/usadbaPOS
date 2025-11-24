@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кухня - Ресторан Усадьба</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+        
+        <header class="header">
+            <button class="back-button" onclick="goBack()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Назад
+            </button>
+            <div class="header-title">
+                <div class="logo">
+                    <img src="./icons/chef.png" alt="Chef" width="20" height="20">
+                </div>
+                <h1>Кухня - Активные заказы</h1>
+            </div>
+            <span class="badge" id="totalOrdersBadge">0 заказов</span>
+        </header>
+    
+        
+        <div class="container">
+            
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterOrders('all')">
+                    Все (<span id="countAll">0</span>)
+                </button>
+                <button class="filter-btn orange" onclick="filterOrders('pending')">
+                    Ожидают (<span id="countPending">0</span>)
+                </button>
+                <button class="filter-btn blue" onclick="filterOrders('preparing')">
+                    Готовятся (<span id="countPreparing">0</span>)
+                </button>
+                <button class="filter-btn green" onclick="filterOrders('ready')">
+                    Готовы (<span id="countReady">0</span>)
+                </button>
+            </div>
+    
+            
+            <div class="orders-grid" id="ordersGrid">
+                <div class="empty-state">
+                    <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/>
+                        <line x1="6" y1="17" x2="18" y2="17"/>
+                    </svg>
+                    <p>Нет активных заказов</p>
+                </div>
+            </div>
+        </div>
+    <script src="js/validation.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
