@@ -47,6 +47,24 @@
                         <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                 </div>
+
+                <div class="filter-controls">
+                    <div class="sort-buttons">
+                        <span class="filter-label">Сортировка:</span>
+                        <button class="sort-btn active" data-sort="default">По умолчанию</button>
+                        <button class="sort-btn" data-sort="price-asc">Дешевле</button>
+                        <button class="sort-btn" data-sort="price-desc">Дороже</button>
+                        <button class="sort-btn" data-sort="name">По названию</button>
+                    </div>
+                    <div class="price-filter">
+                        <span class="filter-label">Цена:</span>
+                        <input type="number" class="price-input" id="minPrice" placeholder="От" min="0">
+                        <span>-</span>
+                        <input type="number" class="price-input" id="maxPrice" placeholder="До" min="0">
+                        <button class="button-small" id="applyPriceFilter">Применить</button>
+                        <button class="button-small secondary" id="resetPriceFilter">Сбросить</button>
+                    </div>
+                </div>
     
                 
                 <div class="categories">

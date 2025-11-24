@@ -378,6 +378,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     let currentCategoryFilter = null;
     let currentSearchQuery = '';
+    let currentSort = 'default';
+    let minPriceFilter = null;
+    let maxPriceFilter = null;
     async function loadCategories() {
         const categoriesContainer = document.querySelector('.categories');
         if (!categoriesContainer) return;
@@ -437,6 +440,23 @@ document.addEventListener('DOMContentLoaded', async function() {
                 dish.name.toLowerCase().includes(query)
             );
         }
+        if (minPriceFilter !== null) {
+            dishes = dishes.filter(dish => dish.price >= minPriceFilter);
+        }
+        if (maxPriceFilter !== null) {
+            dishes = dishes.filter(dish => dish.price <= maxPriceFilter);
+        }
+        switch (currentSort) {
+            case 'price-asc':
+                dishes.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-desc':
+                dishes.sort((a, b) => b.price - a.price);
+                break;
+            case 'name':
+                dishes.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+                break;
+        }
         if (dishes.length === 0) {
             menuGrid.innerHTML = '<div class="empty-state">Блюда не найдены</div>';
             return;
@@ -468,6 +488,39 @@ document.addEventListener('DOMContentLoaded', async function() {
                 currentSearchQuery = this.value.trim();
                 loadMenu();
             }, 300); 
+        });
+    }
+    const sortButtons = document.querySelectorAll('.sort-btn');
+    sortButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            sortButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentSort = this.getAttribute('data-sort');
+            loadMenu();
+        });
+    });
+    const applyPriceFilterBtn = document.getElementById('applyPriceFilter');
+    const resetPriceFilterBtn = document.getElementById('resetPriceFilter');
+    const minPriceInput = document.getElementById('minPrice');
+    const maxPriceInput = document.getElementById('maxPrice');
+    if (applyPriceFilterBtn) {
+        applyPriceFilterBtn.addEventListener('click', function() {
+            minPriceFilter = minPriceInput.value ? parseFloat(minPriceInput.value) : null;
+            maxPriceFilter = maxPriceInput.value ? parseFloat(maxPriceInput.value) : null;
+            if (minPriceFilter !== null && maxPriceFilter !== null && minPriceFilter > maxPriceFilter) {
+                showAlert('Минимальная цена не может быть больше максимальной');
+                return;
+            }
+            loadMenu();
+        });
+    }
+    if (resetPriceFilterBtn) {
+        resetPriceFilterBtn.addEventListener('click', function() {
+            minPriceFilter = null;
+            maxPriceFilter = null;
+            if (minPriceInput) minPriceInput.value = '';
+            if (maxPriceInput) maxPriceInput.value = '';
+            loadMenu();
         });
     }
     if (document.querySelector('.menu-grid')) {

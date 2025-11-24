@@ -262,7 +262,7 @@ body {
 }
 .search-wrapper {
     position: relative;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 .search-input {
     width: 100%;
@@ -280,6 +280,78 @@ body {
     width: 20px;
     height: 20px;
     color: #9ca3af;
+}
+.filter-controls {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.sort-buttons,
+.price-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.filter-label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+    margin-right: 8px;
+}
+.sort-btn {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: white;
+    color: #374151;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.sort-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+.sort-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+.price-input {
+    width: 100px;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 13px;
+}
+.button-small {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.button-small:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+}
+.button-small.secondary {
+    background: #6b7280;
+}
+.button-small.secondary:hover {
+    background: #4b5563;
+    box-shadow: 0 4px 8px rgba(107, 114, 128, 0.4);
 }
 .categories {
     display: flex;
@@ -1331,6 +1403,31 @@ body {
         min-width: 120px;
         flex: none;
         font-size: 13px;
+    }
+    .filter-controls {
+        padding: 12px;
+        gap: 12px;
+    }
+    .sort-buttons,
+    .price-filter {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    .sort-btn {
+        width: 100%;
+        text-align: center;
+    }
+    .price-filter {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .price-input {
+        width: calc(50% - 20px);
+        flex: 1;
+    }
+    .button-small {
+        width: calc(50% - 4px);
     }
     .sidebar {
         width: 100%;
